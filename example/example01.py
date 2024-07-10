@@ -70,6 +70,34 @@ print(f'''[ 음식나라 ]
 {today}
 ''')
 
+#---------------
+date = '2014. 07. 07. 14:35:24'
+soju = 2
+chicken = 1
+
+total = (soju * 3000) + (chicken * 12000)
+vat = int(total * (10/110))  # 부가세 = 합계금액 * 10/110
+supply = int(total * (100/110)) # 공급가액 = 합계급액 * 100/110
+paid = 50000
+charge = paid - total
+
+print(f'''[ 음식나라 ]
+-----------------------
+소주\t\t{soju}\t\t{soju*3000}
+너나치킨\t{chicken}\t\t{chicken*12000}
+-----------------------
+과세합계\t{supply}
+부가세\t{vat}
+------------------------
+총합계\t\t\t{total}
+받은금액\t\t\t{paid}
+잔돈\t\t\t\t{charge}
+-------------------------
+{date}
+''')
+
+
+
 # 11
 name = '홍길동'
 weight = 40
