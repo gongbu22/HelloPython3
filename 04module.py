@@ -64,7 +64,26 @@ temp = op.sub(basetemp,
 
 print(f'수심 {deeps} m - 수온 {temp} ℃')
 
-
 # 자동차 주행거리 계산
+speed = int(input('주행 속도 : '))
+time = int(input('주행 시간 : '))
+
+# dist = speed * time
+dist = op.mul(speed, time)
+
+print(f'주행 이동 거리 : {dist} km')
 
 # 컴퓨터 업무 수량 파악
+# 3 * 8 = comp * time
+# comp = 3 * 8 / time
+
+worktime = int(input('근무시간을 입력하세요. '))
+
+exp1 = op.mul(3, 8)
+# comp = 3 * 8 / worktime
+# etcComp = 1 if (3 * 8 % worktime) > 0 else 0
+
+comp = op.floordiv(exp1, worktime)
+etcComp = 1 if op.mod(exp1 % worktime) > 0  else 0
+
+print(f'필요한 컴퓨터 : {comp + etcComp}')
