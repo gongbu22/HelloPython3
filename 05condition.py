@@ -371,7 +371,7 @@ powerPrice = basePrice + (unitPrice * powerAmount)
 
 print(f'''
 🔌사용량 : {powerAmount} kwh
-기본요금: {basePrice} 원
-단가 : {unitPrice} 원
-⚡전기 요금 : {powerPrice} 원
+기본요금: {basePrice:,} 원
+단가 : {unitPrice:,} 원
+⚡전기 요금 : {powerPrice:,} 원
 ''')
