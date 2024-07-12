@@ -68,4 +68,68 @@ print(f'남은 빵 개수: {rest}')
 # 점염병 예상 감염자 구하기
 print('30일 이후 예상 감염자 수 : ', 2**30)
 
+# 할당 연산자
+# 변수에 값을 대입하는 데 사용하는 연산자, 대입 연산자
+# ex) =, +=, -=, *=, ...
+
+# 논리 연산자
+# 피연산자의 논리 자료형(True/False)를 이용하는 연산자, and, or, not
+# not -> and -> or 순서
+
+# 논리 연산자 단축식 평가
+# and 연산자 - 한쪽이 false일 경우 더 평가하지 않고 바로 false 반환
+# or 연산자 - 한쪽이 true일 경우 더 평가하지 않고 바로 true 반환
+
+# 삼항 연산자
+# 조건문을 한 줄로 표현할 수 있는 연산자
+# 참일때값 if 조건식 else 거짓일때값
+
+myScore = 95
+result = '합격!' if myScore >= 90 else '불합격!'
+
+print(result)
+
+# 복리 계산기
+# 복리 계산 = 원금 * ( 1 + 이자율 ) 기간 제곱
+money = 5000000
+total = int(money * (1.05**5))
+print(f'5년 후 총 수령액 : {total} 원')
+
+#--------선생님 풀이--------------
+money = 5_000_000
+rate = 0.05
+money = money + (money * rate)  # 1년후 총 금액
+money = money + (money * rate)  # 1년후 총 금액
+money = money + (money * rate)  # 1년후 총 금액
+money = money + (money * rate)  # 1년후 총 금액
+money = money + (money * rate)  # 1년후 총 금액
+
+print(f'5년 후 총 수령액 : {int(money):,} 원')
+
+# 범퍼카 탑승
+height = float(input('어린이의 신장을 입력하세요. '))
+boarding = 'True' if height >= 120 else 'False'
+print(boarding)
+
+#--------선생님 풀이--------------
+child = int(input('어린이의 신장을 입력하세요 : '))
+isRide = (child >= 120)
+
+# 범퍼카 탑승 가능 판별
+childHeight = float(input('어린이의 신장을 입력하세요. '))
+childBoarding = 'True' if childHeight >= 120 and childHeight < 170 else 'False'
+print(childBoarding)
+
+#-------선생님 풀이--------------
+child = int(input('어린이의 신장을 입력하세요 : '))
+isRide = (child >= 120) & (child < 170)
+
+print(f'{isRide}')
+
+# 적자/흑자 판별
+income = int(input('수입이 얼마입니까? '))
+spend = int(input('지출이 얼마입니까? '))
+
+moneyResult = '흑자' if income > spend else '적자'
+print(moneyResult)
 
