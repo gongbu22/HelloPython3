@@ -63,3 +63,155 @@ even = 0
 for i in range(2, 101, 2):
     even += i
 print(even)
+
+# 메일 발송
+count = int(input('메일 발송 횟수를 입력하세요. '))
+for _ in range(count):
+    print('메일 발송!')
+
+# 3의 배수 출력하기
+result = ''
+for i in range(1, 10+1):
+    result += f'num = {i}\n'
+    if i % 3 == 0:
+        result += '3의 배수!!\n'
+
+print(result)
+
+# 3의 배수이면서 7의 배수 출력하기
+result = ''
+for i in range(1, 101):
+    result += f'num = {i}\n'
+    if(i % 3 == 0)&(i % 7 == 0):
+        result += '3과 7의 배수!! :) \n'
+
+print(result)
+
+# 구구단 출력하기 ( 5단 )
+dan = int(input('숫자를 입력하세요. '))
+result = ''
+
+for i in range(1, 10):
+    result += f'{dan} x {i} = {dan * i}\n'
+
+print(result)
+
+# 줄바꿈 없이 출력하기 (end='')
+result = ''
+for i in range(1, 11):
+    # print(i, end=' ')
+    result += f'{i} '
+
+print(result)
+
+# 3과 7의 공배수와 최소공배수 출력
+bae = []
+for i in range(1, 101):
+    if (i % 3 == 0) & (i % 7 == 0):
+        bae.append(i)
+        print(f'{i}', end = ' ')
+print(f'최소 공배수 : {bae[0]}')
+
+result = '최소 '
+for i in range(1, 101):
+    if (i % 3 == 0) & (i % 7 == 0):
+        result += f'공배수 {i} '
+print(result)
+
+#-------선생님 풀이-----------
+result = ''
+for i in range(1, 100+1):
+    if i % 3 == 0 and i % 7 == 0:
+        result += f'{i} '
+
+print(result, f'[{ 3 * 7}]')
+
+# range 함수 사용 예
+print(list(range(-10, 0, 1)))
+print(list(range(10, 0, -1)))
+
+# 문자열을 for문에 사용하기
+str = 'Hello, World!!'
+for c in str:
+    print(c, end=' ')
+
+# 3 6 9 게임
+# 숫자 범위에 따라 나눠서
+# 1 ~ 10 : 3, 6, 9
+# 11 ~ 20: 13, 16, 19
+# ...
+# 31 ~ 39: 31, 32, 33, ..., 39
+# ...
+
+for i in range(1, 100):
+    if i < 10:
+        if i % 3 == 0:
+            print(f'{i} 짝!')
+        else:
+            print(i)
+    else:
+        clap = ''
+
+        fnum = i // 10
+        lnum = i % 10
+
+        if fnum % 3 == 0: clap += '짝!'
+        if lnum % 3 == 0 and lnum != 0: clap += '짝!'
+
+        print(f'{i} {clap}')
+
+# 열차 교차 시간 알아내기
+
+timeHour = 0
+timeMin = 0
+result = ''
+for i in range(0, 541):
+    timeHour = 9+(i // 60)
+    timeMin = i % 60
+    result = f'{timeHour}시 {timeMin}분'
+    if (i % 10 == 0) & (i % 25 == 0) & ( i % 30 == 0 ):
+        print(result)
+    elif (i % 10 == 0) & (i % 25 == 0):
+        print(result)
+    elif (i % 25 == 0) & ( i % 30 == 0 ):
+        print(result)
+    elif (i % 10 == 0) & ( i % 30 == 0 ):
+        print(result)
+
+#------------선생님 풀이 ---------------
+trainA = 10
+trainB = 25
+trainC = 30
+
+for min in range(1, 540+1):
+
+    if min % trainA == 0 and min % trainB == 0:
+        hour = 9 + min // 60
+        min = min % 60
+        print(f'{hour}시 {min}분 : A - B 교차!')
+    elif min % trainB == 0 and min % trainC == 0:
+        hour = 9 + min // 60
+        min = min % 60
+        print(f'{hour}시 {min}분 : B - C 교차!')
+    elif min % trainA == 0 and min % trainC == 0:
+        hour = 9 + min // 60
+        min = min % 60
+        print(f'{hour}시 {min}분 : A - C 교차!')
+
+# 로그인 기능 만들기
+passwd = input('관리자 암호를 입력하세요. ')
+
+isLogin = False
+
+for i in range(5):
+    # if isLogin == False:
+    if not isLogin:
+        passwd = input('관리자 암호를 입력하세요. ')
+
+        if passwd == 'hanbitac':
+            isLogin = True
+            print('로그인 됐습니다!')
+        else:
+            print('암호를 다시 확인하세요!')
+
+if not isLogin: print('로그인 실패! 횟수 초과!')
