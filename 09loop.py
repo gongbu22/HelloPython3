@@ -183,19 +183,19 @@ trainA = 10
 trainB = 25
 trainC = 30
 
-for min in range(1, 540+1):
+for mins in range(1, 540+1):
 
-    if min % trainA == 0 and min % trainB == 0:
-        hour = 9 + min // 60
-        min = min % 60
+    if mins % trainA == 0 and mins % trainB == 0:
+        hour = 9 + mins // 60
+        min = mins % 60
         print(f'{hour}시 {min}분 : A - B 교차!')
-    elif min % trainB == 0 and min % trainC == 0:
-        hour = 9 + min // 60
-        min = min % 60
+    elif mins % trainB == 0 and mins % trainC == 0:
+        hour = 9 + mins // 60
+        min = mins % 60
         print(f'{hour}시 {min}분 : B - C 교차!')
-    elif min % trainA == 0 and min % trainC == 0:
-        hour = 9 + min // 60
-        min = min % 60
+    elif mins % trainA == 0 and mins % trainC == 0:
+        hour = 9 + mins // 60
+        min = mins % 60
         print(f'{hour}시 {min}분 : A - C 교차!')
 
 # 로그인 기능 만들기
