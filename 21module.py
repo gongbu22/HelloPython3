@@ -62,3 +62,53 @@ print(val)
 # pip install scikit-learn
 # pip install pymysql  - 데이터베이스 사용할 때 필요
 # pip install fastapi
+
+# dangdang.example 에 각 문제에 대한 모듈 작성
+import dangdang.example as ex
+
+# 단위 환산 ( convertUnit / readUnit / printUnits )
+
+# len = ex.readUnit()
+# cm, m, inch, ft = ex.convertUnit(len)
+# ex.printUnits(len, cm, m, inch, ft)
+
+#-----------선생님 풀이---------
+mm = ex.readUnit()
+units = ex.convertUnit(mm)
+ex.printUnits(units)
+
+# 할인된 상품 가격표 출력 ( discountPrice / readDiscount / printPrices )
+
+# print(f'''{"-"*40}
+# -- 한빛마트 오늘의 할인 가격표 출력 시스템 --
+# {"-"*40}''')
+# discount = ex.readDiscount()
+# products = {'쌀': 9900, '상추': 1900, '고추': 2900, '마늘': 8900, '통닭': 5600, '햄': 6900, '치즈': 3900}
+# disProducts = ex.discountPrice(discount, products)
+# ex.printPrices(discount, products, disProducts)
+# ----------선생님 풀이-----------
+rate = ex.readDiscount()
+dcprice = ex. discountPrice(rate)
+ex.printPrices(dcprice, rate)
+
+
+# 주민번호 유효성 체크 ( checkJumin / readJumin / printJumin )
+# 주민등록번호 앞 12 자리에
+# 각각 2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5 를 곱한 값을
+# 모두 더하고
+# 그 결과값을 11로 나눈 나머지를 11에서 뺍니다.
+# 계산 결과값이 주민등록번호 마지막 자리 숫자와 일치하면 유효!
+#123456-1234567
+#******-*******
+#234567 892345
+# 2+6+12+20+30+42+8+18+6+12+20+30
+# 11 - (206 % 11) = 3 ? 7
+
+# jumin = ex.readJumin()
+# result = ex.checkJumin(jumin)
+# ex.printJumin(jumin, result)
+
+#----------선생님 풀이-----------
+ex.checkJumin('1234561234567')
+
+# ex.checkJumin('123456-1234567')
