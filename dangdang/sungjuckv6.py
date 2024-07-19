@@ -20,7 +20,7 @@ def displayMenu():
 sjs = []
 
 # 성적데이터를 입력 받는 함수
-def readSungJuck():
+def readSungJuk():
     sjList = []
     cnt = len(sjs)
     sjList.append(input(f'{cnt}번학생 이름은? '))
@@ -30,7 +30,7 @@ def readSungJuck():
 
     return sjList
 
-def addSungJuck(sjList):
+def addSungJuk(sjList):
     sjList.append(sjList[1] + sjList[2] + sjList[3])
     sjList.append(sjList[4] / 3)
     grd = '수' if (sjList[5] >= 90) else \
@@ -40,6 +40,7 @@ def addSungJuck(sjList):
     sjList.append(grd)
     # 입력받은 성적 데이터를 리스트에 저장
     sjs.append(sjList)
+    saveSungJuk(sjs)
 
 
 
@@ -48,7 +49,7 @@ def showSungJuk():
     result = ''
     for sj in sjs:
         result += f'이름: {sj[0]}, 국어: {sj[1]}, 영어: {sj[2]}, 수학: {sj[3]}\n'
-        print(result)
+    print(result)
 
 
 # sungjuk.dat에 저장된 성적데이터를 읽어서
@@ -58,7 +59,6 @@ def loadSungJuk():
         rows = f.readlines()
 
     for row in rows:
-        sj = []
         data = row.split(',')
         sj = [ d for d in data ]
         sjs.append(sj)
@@ -82,10 +82,12 @@ def loadSungJuk():
 
 # 메모리에 생성된 sjs변수의 모든 성적데이터를
 # sungjuk.dat에 저장
-def saveSungJuk(sjs):
-    with open('dangdang/sungjuk.dat', 'a', encoding='UTF-8') as f:
-        sungjuk = f'{sjs[0]}, {sjs[1]}, {sjs[2]}, {sjs[3]}, {sjs[4]}, {sjs[5]}\n'
-        f.write(sungjuk)
+def saveSungJuk():
+    data = ''
+    for sj in sjs:
+        data += f'{sj[0]}, {sj[1]}, {sj[2]}, {sj[3]}, {sj[4]}, {sj[5]}, {sj[6]}\n'
+    with open('dangdang/sungjuk.dat', 'w', encoding='UTF-8') as f:
+        f.write(data)
 
 # 데이터 초기화 함수 호출
 loadSungJuk()
