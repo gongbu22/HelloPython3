@@ -28,6 +28,33 @@ def readSungJuk():
 
     return sjList
 
+
+# 입력받은 성적 데이터를 테이블에 저장
+def addSungJuk(sjList):
+    computeSungJuk(sjList)
+    newSungJuck(sjList)
+
+
+# 테이블에 저장된 성적 데이터들 중 기본 데이터만 모아서 출력
+def showSungJuk():
+    result = ''
+    sjs = readAllSungJuk()
+    for sj in sjs:
+        result += f'이름: {sj[0]}, 국어: {sj[1]}, 영어: {sj[2]}, 수학: {sj[3]}\n'
+    print(result)
+
+# 학생 이름으로 성적데이터 조회 후 출력
+def showOneSungJuk():
+    name = input('학생 이름은?')
+    result = '데이터가 존재하지 않습니다.'
+    sj = readOneSungJuk(name)
+    if sj:  # 조회한 데이터가 존재한다면
+        result = (f'이름: {sj[1]}, 국어: {sj[2]}, 영어: {sj[3]}, 수학: {sj[4]} \n'
+                f'총점: {sj[5]}, 평균: {sj[6]}, 학점: {sj[7]}\n')
+    print(result)
+
+#------------------------------------
+
 # 성적 데이터 총 갯수 조회
 def getTotalSungJuk():
     sql = 'select count(sjno) total from sungjuk;'
@@ -44,32 +71,16 @@ def getTotalSungJuk():
 
     return cnt
 
-
 # 입력한 성적데이터에 대해 성적처리하는 함수
 def computeSungJuk(sjList):
     sjList.append(sjList[1] + sjList[2] + sjList[3])
     sjList.append(round(sjList[4] / 3, 2))
     grd = '수' if (sjList[5] >= 90) else \
         '우' if (sjList[5] >= 80) else \
-        '미' if (sjList[5] >= 70) else \
-        '양' if (sjList[5] >= 60) else '가'
+            '미' if (sjList[5] >= 70) else \
+                '양' if (sjList[5] >= 60) else '가'
     sjList.append(grd)
     return sjList
-
-# 입력받은 성적 데이터를 테이블에 저장
-def addSungJuk(sjList):
-    computeSungJuk(sjList)
-    newSungJuck(sjList)
-
-
-# 테이블에 저장된 성적 데이터들 중 기본 데이터만 모아서 출력
-def showSungJuk():
-    result = ''
-    sjs = readAllSungJuk()
-    for sj in sjs:
-        result += f'이름: {sj[0]}, 국어: {sj[1]}, 영어: {sj[2]}, 수학: {sj[3]}\n'
-    print(result)
-
 
 # 처리된 성적데이터를 테이블에 저장
 def newSungJuck(sjList):
@@ -77,10 +88,13 @@ def newSungJuck(sjList):
             values (?,?,?,?,?,?,?)'
     conn = sqlite3.connect('db/python.db')
     cursor = conn.cursor()
+
     params = (sjList[0], sjList[1], sjList[2], sjList[3], sjList[4], sjList[5], sjList[6])
     cursor.execute(sql, params)
+
     print(cursor.rowcount, '건의 데이터 추가됨!')
     conn.commit()
+
     cursor.close()
     conn.close()
 
@@ -97,3 +111,17 @@ def readAllSungJuk():
     conn.close()
 
     return sjs
+
+# 학생 한명의 성적 상세 조회
+def readOneSungJuk(name):
+    sql = 'select * from sungjuk where name = ?'
+    # sql = 'select * from sungjuk where name = :name'
+    conn = sqlite3.connect('db/python.db')
+    cursor = conn.cursor()
+    # params = {'name': name}
+    params = (name,)
+    cursor.execute(sql, params)
+    sj = cursor.fetchone()   # 하나만 가져오기
+    cursor.close()
+    conn.close()
+    return sj
