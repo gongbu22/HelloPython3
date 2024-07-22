@@ -65,3 +65,20 @@ def readOneEmp(empid):
     conn.close()
 
     return oneEmp
+
+def delEmp(empid):
+    sql = 'delete from emp where empid = ?'
+    params = (empid, )
+
+    conn = sqlite3.connect('db/python.db')
+    cursor = conn.cursor()
+
+    cursor.execute(sql, params)
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+
+    cnt = cursor.rowcount
+
+    return cnt
