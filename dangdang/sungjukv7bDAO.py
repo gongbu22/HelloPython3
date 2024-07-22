@@ -59,3 +59,17 @@ def readOneSungJuk(sjno):
     cursor.close()
     conn.close()
     return sj
+
+def delSungJuk(sjno):
+    sql = 'delete from sungjuk where sjno = ?'
+    params = (sjno, )
+
+    conn = sqlite3.connect('db/python.db')
+    cursor = conn.cursor()
+
+    cursor.execute(sql, params)
+    conn.commit()
+    print(cursor.rowcount, '건의 데이터가 삭제됨!')
+
+    cursor.close()
+    conn.close()
