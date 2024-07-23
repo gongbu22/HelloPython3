@@ -59,11 +59,22 @@ class SungJukDAO:
 
         params = (sjno,)
         cursor.execute(sql, params)
-        sj = cursor.fetchone()   # 하나만 가져오기
+        rs = cursor.fetchone()   # 하나만 가져오기
+
+        if rs:
+            sj = SungJuk(rs[1], rs[2], rs[3], rs[4])
+            sj.sjno = rs[0]
+            sj.tot = rs[5]
+            sj.avg = rs[6]
+            sj.grd = rs[7]
+            sj.regdate = rs[8]
+        else:
+            sj = None
 
         SungJukDAO._dis_conn(conn, cursor)
 
         return sj
+
 
     def update_sungjuk(self):
         pass

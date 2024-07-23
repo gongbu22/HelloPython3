@@ -65,8 +65,8 @@ class SungJukService:
         result = '데이터가 존재하지 않습니다.'
         sj = sjdao.selectone_sungjuk(sjno)
         if sj:  # 조회한 데이터가 존재한다면
-            result = (f'번호: {sj[0]}, 이름: {sj[1]}, 국어: {sj[2]}, 영어: {sj[3]}, 수학: {sj[4]} \n'
-                      f'총점: {sj[5]}, 평균: {sj[6]}, 학점: {sj[7]}, 등록일: {sj[8]}\n')
+            result = (f'번호: {sj.sjno}, 이름: {sj.name}, 국어: {sj.kor}, 영어: {sj.eng}, 수학: {sj.mat} \n'
+                      f'총점: {sj.tot}, 평균: {sj.avg}, 학점: {sj.grd}, 등록일: {sj.regdate}\n')
         print(result)
 
     @staticmethod
