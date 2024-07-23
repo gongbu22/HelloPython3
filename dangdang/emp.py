@@ -70,3 +70,29 @@ def removeEmp():
     if cnt > 0:
         result = f'{cnt} 건의 데이터가 삭제됨!!'
     print(result)
+
+# 사원번호를 입력받아 데이터 수정
+def modifyEmp():
+    empid = int(input('수정할 사원번호는? '))
+    oneEmp = empdao.readOneEmp(empid)
+    if oneEmp:
+        oneEmp = readAgainEmp(oneEmp)
+        empdao.updateEmp(oneEmp)
+    else:
+        print('수정할 데이터가 존재하지 않습니다.')
+
+def readAgainEmp(oneEmp):
+    nEmp = []
+    nEmp.append(oneEmp[0])  # 번호
+    nEmp.append(input(f'{oneEmp[1]} 사원의 이메일은? ({oneEmp[3]}) '))
+    nEmp.append(input(f'{oneEmp[1]} 사원의 전화번호는? ({oneEmp[4]}) '))
+    nEmp.append(input(f'{oneEmp[1]} 사원의 직책은? ({oneEmp[6]}) '))
+    nEmp.append(int(input(f'{oneEmp[1]} 사원의 급여는? ({oneEmp[7]}) ')))
+    nEmp.append(float(input(f'{oneEmp[1]} 사원의 수당은? ({oneEmp[8]}) (없으면 0) ')))
+    nEmp.append(int(input(f'{oneEmp[1]} 사원의 상사번호는? ({oneEmp[9]}) (없으면 0) ')))
+    nEmp.append(int(input(f'{oneEmp[1]} 사원의 부서번호는? ({oneEmp[10]}) (없으면 0) ')))
+    nEmp.append(oneEmp[0]) # 사원번호
+    nEmp[5] = float(nEmp[5]) if nEmp[5] != '0' else None
+    nEmp[6] = int(nEmp[6]) if nEmp[6] != '0' else 'null'
+    nEmp[7] = int(nEmp[7]) if nEmp[7] != '0' else 'null'
+    return nEmp
