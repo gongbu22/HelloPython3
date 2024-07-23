@@ -28,6 +28,7 @@ while True:
         sjv8.show_sungjuk()
 
     elif menu == '3':
+
         print('성적 데이터 상세조회')
         sjv8.showone_sungjuk()
 
