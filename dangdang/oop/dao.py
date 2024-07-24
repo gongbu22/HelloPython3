@@ -1,7 +1,7 @@
 import sqlite3
 import pymysql
 
-from dangdang.oop.models import SungJuk
+from dangdang.oop.models import SungJuk, Employee
 
 # 데이터베이스 연결 문자열
 host = '3.39.240.55'
@@ -145,3 +145,115 @@ class SungJukDAO:
         SungJukDAO._dis_conn(conn, cursor)
 
         return cnt
+
+# 사원 DAO 클래스
+
+class EmpDAO:
+
+    @staticmethod
+    def _make_conn():
+        conn = pymysql.connect(host=host, user=user,
+                               password=passwd, database=dbname, charset='utf8')
+        cursor = conn.cursor()
+        return conn, cursor
+
+    # 데이터베이스 연결객체와 커서 종료
+    @staticmethod
+    def _dis_conn(conn, cursor):
+        cursor.close()
+        conn.close()
+
+
+    @staticmethod
+    def new_emp(emp):
+        sql = "insert into emp values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+
+        conn, cursor = EmpDAO._make_conn()
+
+        params = (emp.empid, emp.fname, emp.lname, emp.email,
+                  emp.phone, emp.hdate, emp.jobid, emp.sal,
+                  emp.comm, emp.mgrid, emp.deptid)
+
+        cursor.execute(sql, params)
+
+        cnt = cursor.rowcount
+        conn.commit()
+
+        cursor.close()
+        conn.close()
+
+        return cnt
+
+    @staticmethod
+    def readall_emp():
+        sql = 'select * from emp;'
+
+        ala = []
+
+        conn, cursor = EmpDAO._make_conn()
+
+        cursor.execute(sql)
+        allemp = cursor.fetchall()
+        for a in allemp:
+            emp = Employee(a[0], a[1], a[2], a[3], a[4],
+                      a[5], a[6], a[7], a[8], a[9], a[10])
+            ala.append(emp)
+
+        EmpDAO._dis_conn(conn, cursor)
+
+        return ala
+
+    @staticmethod
+    def readone_emp(empid):
+        sql = 'select * from emp where empid = %s;'
+
+        conn, cursor = EmpDAO._make_conn()
+
+        params = (empid, )
+
+        cursor.execute(sql, params)
+        a = cursor.fetchone()
+
+        if a:
+            emp = Employee(a[0], a[1], a[2], a[3], a[4],
+                      a[5], a[6], a[7], a[8], a[9], a[10])
+        else:
+            emp = None
+
+        EmpDAO._dis_conn(conn, cursor)
+
+        return emp
+    
+    @staticmethod
+    def update_emp(nEmp):
+        sql = 'update emp set email=%s, phone=%s, jobid=%s, sal=%s, comm=%s, mgrid=%s, deptid=%s \
+               where empid = %s'
+        params = (nEmp.email, nEmp.phone, nEmp.jobid, nEmp.sal, nEmp.comm, nEmp.mgrid, nEmp.deptid, nEmp.empid)
+    
+        conn, cursor = EmpDAO._make_conn()
+    
+        cursor.execute(sql, params)
+        conn.commit()
+        cnt = cursor.rowcount
+    
+        EmpDAO._dis_conn(conn, cursor)
+
+        return cnt
+
+    @staticmethod
+    def del_emp(empid):
+        sql = 'delete from emp where empid = %s'
+        params = (empid, )
+
+        conn, cursor = EmpDAO._make_conn()
+
+        cursor.execute(sql, params)
+        conn.commit()
+
+        EmpDAO._dis_conn(conn, cursor)
+
+        cnt = cursor.rowcount
+
+        return cnt
+
+
