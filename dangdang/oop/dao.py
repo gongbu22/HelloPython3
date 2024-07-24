@@ -56,7 +56,6 @@ class SungJukDAO:
         sql = 'select * from sungjuk where sjno = ?'
 
         conn, cursor = SungJukDAO._make_conn()
-
         params = (sjno,)
         cursor.execute(sql, params)
         rs = cursor.fetchone()   # 하나만 가져오기
