@@ -194,8 +194,12 @@ class EmpService:
 
     @staticmethod
     def show_emp():
+        """
+        사원테이블에서 사원번호, 이름, 이메일, 직책, 부서번호 출력
+        :return emps: 조회된 사원 정보
+        """
         result = ''
-        allemp = empdao.readall_emp()
+        allemp = empdao.select_emp()
         for e in allemp:
             result += f'''사원번호: {e.empid}, 이름: {e.fname}, 이메일: {e.email}, 직책: {e.jobid}, 부서번호: {e.deptid}\n'''
         print(result)
@@ -204,7 +208,7 @@ class EmpService:
     def showone_emp():
         result = '데이터가 존재하지 않습니다.'
         empid = int(input('사원번호는? '))
-        oneEmp = empdao.readone_emp(empid)
+        oneEmp = empdao.selectone_emp(empid)
 
         if oneEmp:
             result = (f'사원번호: {oneEmp.empid}, 이름: {oneEmp.fname}, 성: {oneEmp.lname}, email: {oneEmp.email} \n'

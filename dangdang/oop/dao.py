@@ -185,26 +185,26 @@ class EmpDAO:
         return cnt
 
     @staticmethod
-    def readall_emp():
-        sql = 'select * from emp;'
+    def select_emp():
+        sql = 'select empid, fname, email, jobid, deptid from emp;'
 
         ala = []
 
         conn, cursor = EmpDAO._make_conn()
 
         cursor.execute(sql)
-        allemp = cursor.fetchall()
-        for a in allemp:
-            emp = Employee(a[0], a[1], a[2], a[3], a[4],
-                      a[5], a[6], a[7], a[8], a[9], a[10])
-            ala.append(emp)
+        emps = cursor.fetchall()
+        for emp in emps:
+            aemp = Employee(emp[0], emp[1], None, emp[2], None,
+                      None, emp[3], None, None, None, emp[4])
+            ala.append(aemp)
 
         EmpDAO._dis_conn(conn, cursor)
 
         return ala
 
     @staticmethod
-    def readone_emp(empid):
+    def selectone_emp(empid):
         sql = 'select * from emp where empid = %s;'
 
         conn, cursor = EmpDAO._make_conn()
