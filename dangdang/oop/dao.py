@@ -147,7 +147,6 @@ class SungJukDAO:
         return cnt
 
 # 사원 DAO 클래스
-
 class EmpDAO:
 
     @staticmethod

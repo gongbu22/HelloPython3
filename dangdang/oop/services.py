@@ -236,7 +236,7 @@ class EmpService:
     @staticmethod
     def modify_emp():
         empid = int(input('수정할 사원번호는? '))
-        oneEmp = empdao.readone_emp(empid)
+        oneEmp = empdao.selectone_emp(empid)
         if oneEmp:
             oneEmp = EmpService.readagain_emp(oneEmp)
             cnt = empdao.update_emp(oneEmp)
