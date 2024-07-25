@@ -250,7 +250,6 @@ class EmpDAO:
         conn.commit()
 
         EmpDAO._dis_conn(conn, cursor)
-
         cnt = cursor.rowcount
 
         return cnt
